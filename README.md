@@ -1,279 +1,376 @@
 # -FLOW
-毎日の生活を、無理なく流れにのせる
 <!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="theme-color" content="#8063c9">
 <title>FLOW</title>
 
 <style>
-* {
-  box-sizing: border-box;
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:#f8f7fb;
+  color:#28252d;
+  font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;
 }
 
-body {
-  margin: 0;
-  background: #faf9fc;
-  color: #25232a;
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Hiragino Sans",
-    "Yu Gothic",
-    sans-serif;
+button,input,select{font:inherit}
+button{border:0;cursor:pointer}
+
+.app{
+  max-width:650px;
+  margin:auto;
+  padding:18px 15px 100px;
 }
 
-button,
-input {
-  font: inherit;
+header{
+  padding:8px 4px 18px;
 }
 
-button {
-  border: 0;
-  cursor: pointer;
+.logo{
+  font-size:34px;
+  font-weight:900;
+  letter-spacing:.08em;
 }
 
-.app {
-  max-width: 600px;
-  margin: auto;
-  padding: 20px 18px 90px;
+.sub{
+  font-size:13px;
+  color:#8a8590;
+  margin-top:4px;
 }
 
-header {
-  padding: 12px 4px 20px;
+.nav{
+  display:flex;
+  gap:6px;
+  overflow:auto;
+  padding:4px;
+  background:#eeeaf5;
+  border-radius:16px;
+  margin-bottom:14px;
 }
 
-.logo {
-  font-size: 34px;
-  font-weight: 800;
-  letter-spacing: .08em;
+.nav button{
+  white-space:nowrap;
+  padding:10px 13px;
+  border-radius:12px;
+  background:transparent;
+  color:#777;
+  font-weight:700;
 }
 
-.sub {
-  margin-top: 5px;
-  color: #777;
-  font-size: 14px;
+.nav button.active{
+  background:white;
+  color:#694db2;
+  box-shadow:0 2px 8px #0001;
 }
 
-.tabs {
-  display: flex;
-  background: #eeeaf3;
-  border-radius: 16px;
-  padding: 4px;
-  margin-bottom: 18px;
+.card{
+  background:white;
+  border-radius:20px;
+  padding:17px;
+  margin-bottom:13px;
+  box-shadow:0 3px 16px #00000009;
 }
 
-.tabs button {
-  flex: 1;
-  padding: 12px;
-  border-radius: 13px;
-  background: transparent;
-  color: #777;
-  font-weight: 700;
+h2{
+  font-size:20px;
+  margin:0 0 4px;
 }
 
-.tabs button.active {
-  background: white;
-  color: #6d4fc2;
-  box-shadow: 0 2px 8px #00000010;
+h3{
+  margin:0 0 12px;
 }
 
-.card {
-  background: white;
-  border-radius: 22px;
-  padding: 18px;
-  margin-bottom: 14px;
-  box-shadow: 0 3px 15px #00000008;
+.muted{
+  color:#888;
+  font-size:13px;
 }
 
-h2 {
-  font-size: 21px;
-  margin: 0 0 5px;
+.mini{
+  font-size:12px;
+  color:#999;
 }
 
-.desc {
-  font-size: 13px;
-  color: #888;
-  margin-bottom: 15px;
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
 }
 
-.task {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 14px 4px;
-  border-bottom: 1px solid #eee;
+.stat{
+  background:#f5f2f9;
+  border-radius:15px;
+  padding:13px;
 }
 
-.task:last-child {
-  border-bottom: 0;
+.stat b{
+  display:block;
+  font-size:20px;
+  margin-top:3px;
 }
 
-.check {
-  width: 27px;
-  height: 27px;
-  border: 2px solid #c9c3d3;
-  border-radius: 50%;
-  background: white;
-  flex: none;
-  display: grid;
-  place-items: center;
+.btn{
+  width:100%;
+  padding:13px;
+  border-radius:14px;
+  background:#8063c9;
+  color:white;
+  font-weight:800;
+  margin-top:9px;
 }
 
-.check.done {
-  background: #8063c9;
-  border-color: #8063c9;
-  color: white;
+.btn.light{
+  background:#eeeaf5;
+  color:#6749a8;
 }
 
-.taskname {
-  flex: 1;
-  font-weight: 600;
+.btn.gray{
+  background:#eee;
+  color:#555;
 }
 
-.task.done .taskname {
-  text-decoration: line-through;
-  color: #aaa;
+.btn.danger{
+  background:#fff0f0;
+  color:#a44;
 }
 
-.small {
-  font-size: 12px;
-  color: #999;
+.row{
+  display:flex;
+  gap:8px;
 }
 
-.btn {
-  width: 100%;
-  padding: 13px;
-  border-radius: 14px;
-  background: #8063c9;
-  color: white;
-  font-weight: 700;
-  margin-top: 10px;
+.row>*{
+  flex:1;
 }
 
-.btn.light {
-  background: #f0edf5;
-  color: #6044a0;
+.input,
+.select{
+  width:100%;
+  padding:11px;
+  border:1px solid #ddd;
+  border-radius:12px;
+  background:white;
 }
 
-.btn.gray {
-  background: #eee;
-  color: #555;
+.task{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  padding:12px 3px;
+  border-bottom:1px solid #eee;
 }
 
-.row {
-  display: flex;
-  gap: 8px;
+.task:last-child{
+  border-bottom:0;
 }
 
-.row > * {
-  flex: 1;
+.check{
+  width:27px;
+  height:27px;
+  border-radius:50%;
+  border:2px solid #c9c4d1;
+  background:white;
+  flex:none;
 }
 
-.progress {
-  height: 9px;
-  background: #eee;
-  border-radius: 10px;
-  overflow: hidden;
-  margin: 14px 0;
+.check.done{
+  background:#8063c9;
+  border-color:#8063c9;
+  color:white;
 }
 
-.progressbar {
-  height: 100%;
-  background: #8063c9;
-  width: 0%;
-  transition: .3s;
+.taskname{
+  flex:1;
+  font-weight:650;
 }
 
-.message {
-  text-align: center;
-  font-weight: 700;
-  padding: 8px;
+.task.done .taskname{
+  text-decoration:line-through;
+  color:#aaa;
 }
 
-.input {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  background: white;
+.iconbtn{
+  background:#f0edf4;
+  border-radius:10px;
+  padding:7px;
+  color:#65509a;
 }
 
-.routineStep {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  padding: 15px 5px;
-  border-bottom: 1px solid #eee;
+.progress{
+  height:9px;
+  background:#eee;
+  border-radius:9px;
+  overflow:hidden;
+  margin:12px 0;
 }
 
-.num {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background: #eeeaf3;
-  color: #6547a7;
-  display: grid;
-  place-items: center;
-  font-weight: 800;
-  flex: none;
+.bar{
+  height:100%;
+  background:#8063c9;
+  width:0%;
+  transition:.25s;
 }
 
-.timer {
-  text-align: center;
-  font-size: 52px;
-  font-weight: 800;
-  margin: 15px 0;
+.timer{
+  font-size:48px;
+  text-align:center;
+  font-weight:900;
+  letter-spacing:.04em;
+  margin:12px 0;
 }
 
-.hidden {
-  display: none !important;
+.center{
+  text-align:center;
 }
 
-.notice {
-  background: #fff5dd;
-  padding: 14px;
-  border-radius: 15px;
-  color: #72571d;
-  margin-top: 12px;
+.badge{
+  display:inline-block;
+  padding:5px 9px;
+  border-radius:20px;
+  background:#eeeaf5;
+  color:#694db2;
+  font-size:12px;
+  font-weight:700;
 }
 
-.modal {
-  position: fixed;
-  inset: 0;
-  background: #0007;
-  display: flex;
-  align-items: flex-end;
-  z-index: 10;
+.hidden{
+  display:none!important;
 }
 
-.modalbox {
-  background: white;
-  width: 100%;
-  max-width: 600px;
-  margin: auto 0 0;
-  padding: 22px;
-  border-radius: 25px 25px 0 0;
+.routineTabs{
+  display:flex;
+  gap:7px;
+  overflow:auto;
+  margin:10px 0;
 }
 
-.modalbox h3 {
-  margin-top: 0;
+.routineTab{
+  min-width:105px;
+  padding:11px;
+  border-radius:13px;
+  background:#f0edf4;
+  color:#6a6470;
+  text-align:left;
 }
 
-.choice {
-  width: 100%;
-  padding: 15px;
-  border: 2px solid #eee;
-  border-radius: 15px;
-  margin: 8px 0;
-  text-align: left;
-  background: white;
+.routineTab.active{
+  background:#8063c9;
+  color:white;
 }
 
-.choice:hover {
-  border-color: #8063c9;
+.step{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:11px 0;
+  border-bottom:1px solid #eee;
+}
+
+.stepnum{
+  width:29px;
+  height:29px;
+  border-radius:50%;
+  background:#eeeaf5;
+  color:#6949a8;
+  display:grid;
+  place-items:center;
+  font-weight:800;
+}
+
+.stepbody{
+  flex:1;
+}
+
+.empty{
+  padding:20px 5px;
+  text-align:center;
+  color:#999;
+}
+
+.suggest{
+  background:#f5f0ff;
+  border-radius:16px;
+  padding:14px;
+  margin-top:10px;
+}
+
+.schedule{
+  display:flex;
+  gap:9px;
+  align-items:center;
+  padding:10px 0;
+  border-bottom:1px solid #eee;
+}
+
+.scheduleTime{
+  font-weight:800;
+  width:52px;
+}
+
+.pillrow{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+}
+
+.pill{
+  padding:8px 11px;
+  border-radius:20px;
+  background:#eeeaf5;
+  color:#67509a;
+}
+
+.pill.active{
+  background:#8063c9;
+  color:white;
+}
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:#0007;
+  display:flex;
+  align-items:flex-end;
+  z-index:20;
+}
+
+.modalbox{
+  background:white;
+  width:100%;
+  max-width:650px;
+  margin:auto 0 0;
+  padding:20px;
+  border-radius:23px 23px 0 0;
+  max-height:85vh;
+  overflow:auto;
+}
+
+.choice{
+  width:100%;
+  padding:14px;
+  border:1px solid #ddd;
+  background:white;
+  border-radius:13px;
+  text-align:left;
+  margin:5px 0;
+}
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:22px;
+  transform:translateX(-50%);
+  background:#28252d;
+  color:white;
+  padding:11px 16px;
+  border-radius:20px;
+  z-index:50;
+  font-size:13px;
 }
 </style>
 </head>
@@ -284,827 +381,2415 @@ h2 {
 
 <header>
   <div class="logo">FLOW</div>
-  <div class="sub">毎日の生活を、無理なく流れにのせる</div>
+  <div class="sub">今やることを、ひとつずつ。</div>
 </header>
 
-<div class="tabs">
-  <button id="minTab" class="active" onclick="showMode('minimum')">
-    🌱 最低限モード
-  </button>
+<nav class="nav">
+  <button id="nHome" class="active" onclick="page('home')">🏠 ホーム</button>
+  <button id="nMin" onclick="page('minimum')">🌱 最低限</button>
+  <button id="nRun" onclick="page('routine')">⏱️ ルーティン</button>
+  <button id="nLog" onclick="page('log')">📊 記録</button>
+  <button id="nSet" onclick="page('settings')">⚙️ 設定</button>
+</nav>
 
-  <button id="runTab" onclick="showMode('routine')">
-    ⏱️ ルーティンモード
-  </button>
+<!-- HOME -->
+<section id="home">
+
+<div class="card">
+<h2>今日のFLOW</h2>
+<div class="muted" id="todayText"></div>
+
+<div class="grid" style="margin-top:12px">
+<div class="stat">
+FLOW TIME
+<b id="homeTime">0:00</b>
 </div>
 
+<div class="stat">
+達成率
+<b id="homeRate">0%</b>
+</div>
+</div>
 
-<!-- 最低限モード -->
-<section id="minimum">
+<div class="progress">
+<div id="homeBar" class="bar"></div>
+</div>
 
-  <div class="card">
+<div id="conditionBox"></div>
 
-    <h2>今日の最低限</h2>
+<button class="btn" onclick="flowDecide()">
+✨ FLOWに任せる
+</button>
+</div>
 
-    <div class="desc">
-      順番は自由。できたものからチェックしよう。
-    </div>
+<div class="card">
+<h2>今やること</h2>
+<div id="nowBox"></div>
+</div>
 
-    <div id="tasks"></div>
+<div class="card">
+<h2>今日の予定</h2>
+<div id="scheduleList"></div>
 
-    <div class="progress">
-      <div id="minProgress" class="progressbar"></div>
-    </div>
+<button class="btn light" onclick="openSchedule()">
+＋ 予定を追加
+</button>
+</div>
 
-    <div id="minMessage" class="message">
-      今日はここから。
-    </div>
-
-    <div class="row">
-
-      <button class="btn light" onclick="addTask()">
-        ＋ やることを追加
-      </button>
-
-      <button class="btn light" onclick="zeroMode()">
-        🌱 やる気ゼロ
-      </button>
-
-    </div>
-
-    <button class="btn gray" onclick="resetTasks()">
-      今日をリセット
-    </button>
-
-  </div>
-
-
-  <div class="card">
-
-    <h2>あとでやる</h2>
-
-    <div class="desc">
-      今じゃなくても大丈夫。あとで戻そう。
-    </div>
-
-    <div id="later"></div>
-
-  </div>
+<div class="card">
+<h2>今日の活動</h2>
+<div id="categoryStats"></div>
+</div>
 
 </section>
 
 
-<!-- ルーティンモード -->
+<!-- MINIMUM -->
+<section id="minimum" class="hidden">
+
+<div class="card">
+
+<h2>🌱 最低限モード</h2>
+<div class="muted">
+今日は全部やらなくていい。できることから。
+</div>
+
+<div id="minTasks"></div>
+
+<div class="progress">
+<div id="minBar" class="bar"></div>
+</div>
+
+<div class="center muted" id="minRate"></div>
+
+<div class="row">
+
+<button class="btn" onclick="addTask()">
+＋ 追加
+</button>
+
+<button class="btn light" onclick="fiveMinute()">
+🆘 5分だけ
+</button>
+
+</div>
+
+<button class="btn gray" onclick="resetToday()">
+今日をリセット
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>⏱️ 今の計測</h2>
+
+<div id="activeTimer">
+<div class="empty">
+今は計測していません。
+</div>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ROUTINE -->
 <section id="routine" class="hidden">
 
-  <div class="card">
+<div class="card">
 
-    <h2>ルーティン</h2>
+<h2>⏱️ ルーティン</h2>
 
-    <div class="desc">
-      決めた順番で、時間内に流れよう。
-    </div>
+<div class="muted">
+3つまで自由に作れます。
+</div>
 
-    <label class="small">
-      出発時刻
-    </label>
+<div class="routineTabs" id="routineTabs"></div>
 
-    <input
-      id="leaveTime"
-      class="input"
-      type="time"
-      onchange="checkRush()"
-    >
+<div class="row">
 
-    <div id="routineInfo" class="notice">
-      通常モード：必要時間 約28分
-    </div>
+<button class="btn light" onclick="editRoutine()">
+✏️ 名前を編集
+</button>
 
-    <div id="routineSteps"></div>
+<button class="btn light" onclick="duplicateRoutine()">
+📋 複製
+</button>
 
-    <button class="btn" onclick="startTimer()">
-      ▶ スタート
-    </button>
+</div>
 
-    <button class="btn light" onclick="nextStep()">
-      次へ →
-    </button>
+<div id="routineSteps"></div>
 
-  </div>
+<button class="btn" onclick="addStep()">
+＋ 項目を追加
+</button>
+
+<div class="grid">
+
+<button class="btn light" onclick="startRoutine()">
+▶ 開始
+</button>
+
+<button class="btn gray" onclick="skipStep()">
+⏭️ 次へ
+</button>
+
+</div>
+
+<div id="routineTimer"></div>
+
+</div>
+
+</section>
 
 
-  <div class="card">
+<!-- LOG -->
+<section id="log" class="hidden">
 
-    <h2 id="timerName">
-      準備できたらスタート
-    </h2>
+<div class="card">
 
-    <div id="timer" class="timer">
-      00:00
-    </div>
+<h2>📊 FLOW TIME</h2>
 
-    <button class="btn gray" onclick="stopTimer()">
-      ⏸ 一時停止
-    </button>
+<div class="pillrow">
 
-  </div>
+<button class="pill active"
+onclick="logRange(1,this)">
+今日
+</button>
+
+<button class="pill"
+onclick="logRange(7,this)">
+7日
+</button>
+
+<button class="pill"
+onclick="logRange(30,this)">
+30日
+</button>
+
+</div>
+
+<div id="logContent" style="margin-top:14px"></div>
+
+</div>
+
+<div class="card">
+
+<h2>🧠 コンディション</h2>
+
+<div class="muted">
+今日の状態
+</div>
+
+<div id="conditionChoices"
+class="pillrow"
+style="margin-top:10px">
+</div>
+
+</div>
+
+</section>
+
+
+<!-- SETTINGS -->
+<section id="settings" class="hidden">
+
+<div class="card">
+
+<h2>💾 データ</h2>
+
+<div class="muted">
+スマホを変えるときなどにバックアップできます。
+</div>
+
+<button class="btn" onclick="exportData()">
+📤 データを書き出す
+</button>
+
+<button class="btn light"
+onclick="document.getElementById('importFile').click()">
+📥 データを読み込む
+</button>
+
+<input
+id="importFile"
+type="file"
+accept=".json"
+class="hidden"
+onchange="importData(event)"
+>
+
+</div>
+
+<div class="card">
+
+<h2>📝 FLOWについて</h2>
+
+<div class="muted">
+FLOWは「全部やる」ためではなく、
+今の自分にできる次の一歩を見つけるためのアプリ。
+</div>
+
+</div>
 
 </section>
 
 </div>
 
 
-<!-- 急ぎモード確認 -->
-<div id="rushModal" class="modal hidden">
-
-  <div class="modalbox">
-
-    <h3>🏃 時間が足りないかも</h3>
-
-    <p>
-      通常ルーティンのままだと、
-      出発時刻までに終わらない可能性があります。
-    </p>
-
-    <button class="choice" onclick="setRush(true)">
-      🏃 急ぎモードにする
-    </button>
-
-    <button class="choice" onclick="setRush(false)">
-      🧘 通常モードのまま
-    </button>
-
-  </div>
-
+<div id="modal" class="modal hidden">
+<div class="modalbox" id="modalBox"></div>
 </div>
+
+<div id="toast" class="toast hidden"></div>
 
 
 <script>
 
-const defaultTasks = [
-  { name: "英単語", done: false },
-  { name: "英文法", done: false },
-  { name: "運動", done: false },
-  { name: "水分をとる", done: false },
-  { name: "明日の準備", done: false }
+const KEY="FLOW_DATA_V3";
+
+const cats=[
+"📚 勉強",
+"💃 運動",
+"💄 美容",
+"🧹 家事",
+"🎀 自分時間",
+"📝 その他"
 ];
 
+let data;
+let activeTask=null;
+let taskInterval=null;
 
-const defaultRoutine = [
-  { name: "着替える", normal: 5, rush: 3 },
-  { name: "朝ごはん", normal: 10, rush: 7 },
-  { name: "歯みがき・洗顔", normal: 8, rush: 5 },
-  { name: "荷物確認", normal: 5, rush: 3 }
+let selectedRoutine=0;
+let routineInterval=null;
+let routineRunning=false;
+let routineIndex=0;
+let routineRemaining=0;
+
+let currentLogRange=1;
+
+
+/* =========================
+   DATA
+========================= */
+
+function defaultData(){
+
+return {
+
+tasks:[
+{
+name:"英単語",
+cat:"📚 勉強",
+done:false
+},
+{
+name:"英文法",
+cat:"📚 勉強",
+done:false
+},
+{
+name:"運動",
+cat:"💃 運動",
+done:false
+},
+{
+name:"明日の準備",
+cat:"📝 その他",
+done:false
+}
+],
+
+routines:[
+{
+name:"ルーティン1",
+steps:[
+{name:"準備",min:5},
+{name:"メイン",min:20},
+{name:"片付け",min:5}
+]
+},
+{
+name:"ルーティン2",
+steps:[
+{name:"準備",min:5},
+{name:"メイン",min:20}
+]
+},
+{
+name:"ルーティン3",
+steps:[
+{name:"準備",min:5},
+{name:"メイン",min:20}
+]
+}
+],
+
+records:{},
+
+schedule:[],
+
+condition:"😐 普通"
+
+};
+
+}
+
+
+function loadData(){
+
+try{
+
+const old=localStorage.getItem(KEY);
+
+if(old){
+
+const parsed=JSON.parse(old);
+
+if(parsed.tasks && parsed.routines){
+
+return parsed;
+
+}
+
+}
+
+}catch(e){}
+
+return defaultData();
+
+}
+
+
+data=loadData();
+
+
+function saveData(){
+
+localStorage.setItem(
+KEY,
+JSON.stringify(data)
+);
+
+}
+
+
+function todayKey(date=new Date()){
+
+return date.toISOString().slice(0,10);
+
+}
+
+
+function dayRecord(key=todayKey()){
+
+if(!data.records[key]){
+
+data.records[key]={
+total:0,
+cats:{},
+tasks:{}
+};
+
+}
+
+return data.records[key];
+
+}
+
+
+function addRecord(cat,seconds,taskName){
+
+if(seconds<=0)return;
+
+const record=dayRecord();
+
+record.total+=seconds;
+
+record.cats[cat]=
+(record.cats[cat]||0)+seconds;
+
+if(taskName){
+
+record.tasks[taskName]=
+(record.tasks[taskName]||0)+seconds;
+
+}
+
+saveData();
+
+}
+
+
+function formatTime(seconds){
+
+seconds=Math.max(
+0,
+Math.floor(seconds||0)
+);
+
+const h=Math.floor(seconds/3600);
+
+const m=Math.floor(
+(seconds%3600)/60
+);
+
+const s=seconds%60;
+
+if(h){
+
+return `${h}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
+
+}
+
+return `${m}:${String(s).padStart(2,"0")}`;
+
+}
+
+
+function esc(text){
+
+return String(text)
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
+
+}
+
+
+/* =========================
+   PAGE
+========================= */
+
+function page(name){
+
+const pages=[
+"home",
+"minimum",
+"routine",
+"log",
+"settings"
 ];
 
+pages.forEach(p=>{
 
-let tasks =
-  JSON.parse(localStorage.getItem("flowTasks")) ||
-  defaultTasks.map(t => ({ ...t }));
+document
+.getElementById(p)
+.classList.toggle(
+"hidden",
+p!==name
+);
 
-
-let later =
-  JSON.parse(localStorage.getItem("flowLater")) ||
-  [];
-
-
-let routine =
-  JSON.parse(localStorage.getItem("flowRoutine")) ||
-  defaultRoutine.map(t => ({ ...t }));
+});
 
 
-let rush = false;
-let currentStep = 0;
-let timerId = null;
-let remaining = 0;
+const navs={
+home:"nHome",
+minimum:"nMin",
+routine:"nRun",
+log:"nLog",
+settings:"nSet"
+};
 
+Object.values(navs).forEach(id=>{
 
-/* 保存 */
+document
+.getElementById(id)
+.classList.remove("active");
 
-function save() {
+});
 
-  localStorage.setItem(
-    "flowTasks",
-    JSON.stringify(tasks)
-  );
+document
+.getElementById(navs[name])
+.classList.add("active");
 
-  localStorage.setItem(
-    "flowLater",
-    JSON.stringify(later)
-  );
+renderAll();
 
 }
 
 
-/* モード切り替え */
+/* =========================
+   RENDER
+========================= */
 
-function showMode(mode) {
+function renderAll(){
 
-  document
-    .getElementById("minimum")
-    .classList.toggle(
-      "hidden",
-      mode !== "minimum"
-    );
-
-  document
-    .getElementById("routine")
-    .classList.toggle(
-      "hidden",
-      mode !== "routine"
-    );
-
-  document
-    .getElementById("minTab")
-    .classList.toggle(
-      "active",
-      mode === "minimum"
-    );
-
-  document
-    .getElementById("runTab")
-    .classList.toggle(
-      "active",
-      mode === "routine"
-    );
-
-  if (mode === "routine") {
-    renderRoutine();
-  }
-
-}
-
-
-/* HTMLエスケープ */
-
-function escapeHtml(text) {
-
-  const div = document.createElement("div");
-
-  div.textContent = text;
-
-  return div.innerHTML;
-
-}
-
-
-/* タスク表示 */
-
-function renderTasks() {
-
-  const box = document.getElementById("tasks");
-
-  box.innerHTML = "";
-
-  tasks.forEach((task, index) => {
-
-    const div = document.createElement("div");
-
-    div.className =
-      "task " + (task.done ? "done" : "");
-
-    div.innerHTML = `
-      <button
-        class="check ${task.done ? "done" : ""}"
-        onclick="toggleTask(${index})"
-        aria-label="チェック"
-      >
-        ${task.done ? "✓" : ""}
-      </button>
-
-      <div class="taskname">
-        ${escapeHtml(task.name)}
-      </div>
-
-      <button
-        class="small"
-        onclick="postpone(${index})"
-      >
-        あとで
-      </button>
-    `;
-
-    box.appendChild(div);
-
-  });
-
-  updateProgress();
-
-  renderLater();
-
-}
-
-
-/* タスク完了 */
-
-function toggleTask(index) {
-
-  tasks[index].done =
-    !tasks[index].done;
-
-  save();
-
-  renderTasks();
-
-}
-
-
-/* 進捗 */
-
-function updateProgress() {
-
-  const total = tasks.length;
-
-  const done =
-    tasks.filter(t => t.done).length;
-
-  const percent =
-    total
-      ? Math.round(done / total * 100)
-      : 0;
-
-  document
-    .getElementById("minProgress")
-    .style.width = percent + "%";
-
-
-  let message = "今日はここから。";
-
-  if (percent === 100) {
-
-    message = "全部できた！明日もがんばろう！";
-
-  } else if (percent >= 80) {
-
-    message = "最低限クリア！";
-
-  } else if (percent >= 50) {
-
-    message = "頑張った！！";
-
-  } else if (percent > 0) {
-
-    message = "今日はここまで！明日またやろう";
-
-  }
-
-
-  document
-    .getElementById("minMessage")
-    .textContent = message;
-
-}
-
-
-/* タスク追加 */
-
-function addTask() {
-
-  const name =
-    prompt("追加することを入力してね");
-
-  if (!name || !name.trim()) {
-    return;
-  }
-
-  tasks.push({
-    name: name.trim(),
-    done: false
-  });
-
-  save();
-
-  renderTasks();
-
-}
-
-
-/* あとでやる */
-
-function postpone(index) {
-
-  later.push(tasks[index].name);
-
-  tasks.splice(index, 1);
-
-  save();
-
-  renderTasks();
-
-}
-
-
-/* あとでやる表示 */
-
-function renderLater() {
-
-  const box =
-    document.getElementById("later");
-
-  if (later.length === 0) {
-
-    box.innerHTML =
-      '<div class="small">まだありません。</div>';
-
-    return;
-
-  }
-
-
-  box.innerHTML = later.map((name, index) => {
-
-    return `
-      <div class="task">
-
-        <div class="taskname">
-          ${escapeHtml(name)}
-        </div>
-
-        <button
-          class="small"
-          onclick="restoreLater(${index})"
-        >
-          戻す
-        </button>
-
-      </div>
-    `;
-
-  }).join("");
-
-}
-
-
-/* あとでやる→戻す */
-
-function restoreLater(index) {
-
-  tasks.push({
-    name: later[index],
-    done: false
-  });
-
-  later.splice(index, 1);
-
-  save();
-
-  renderTasks();
-
-}
-
-
-/* やる気ゼロ */
-
-function zeroMode() {
-
-  tasks = tasks.map(task => ({
-
-    name: task.name + "（ちょっとだけ）",
-
-    done: task.done
-
-  }));
-
-  save();
-
-  renderTasks();
-
-  alert(
-    "今日は「ちょっとだけ」でOK🌱"
-  );
-
-}
-
-
-/* リセット */
-
-function resetTasks() {
-
-  if (
-    !confirm(
-      "今日のチェックをリセットする？"
-    )
-  ) {
-    return;
-  }
-
-  tasks =
-    defaultTasks.map(t => ({ ...t }));
-
-  later = [];
-
-  save();
-
-  renderTasks();
-
-}
-
-
-/* ルーティン表示 */
-
-function renderRoutine() {
-
-  const box =
-    document.getElementById("routineSteps");
-
-  box.innerHTML = "";
-
-  routine.forEach((step, index) => {
-
-    const minutes =
-      rush
-        ? step.rush
-        : step.normal;
-
-    const div =
-      document.createElement("div");
-
-    div.className =
-      "routineStep";
-
-    div.innerHTML = `
-      <div class="num">
-        ${index + 1}
-      </div>
-
-      <div style="flex:1">
-
-        <div style="font-weight:700">
-          ${escapeHtml(step.name)}
-        </div>
-
-        <div class="small">
-          ${minutes}分
-          ${rush ? "・短縮" : ""}
-        </div>
-
-      </div>
-    `;
-
-    box.appendChild(div);
-
-  });
-
-  updateRoutineInfo();
-
-}
-
-
-/* 合計時間 */
-
-function totalMinutes() {
-
-  return routine.reduce(
-    (total, step) =>
-      total +
-      (rush ? step.rush : step.normal),
-    0
-  );
-
-}
-
-
-/* ルーティン情報 */
-
-function updateRoutineInfo() {
-
-  const minutes =
-    totalMinutes();
-
-  document
-    .getElementById("routineInfo")
-    .textContent =
-      (rush
-        ? "🏃 急ぎモード："
-        : "通常モード：")
-      +
-      "必要時間 約"
-      +
-      minutes
-      +
-      "分";
-
-}
-
-
-/* 急ぎモード確認 */
-
-function checkRush() {
-
-  const value =
-    document.getElementById("leaveTime").value;
-
-  if (!value) {
-    return;
-  }
-
-  const now = new Date();
-
-  const [hour, minute] =
-    value.split(":").map(Number);
-
-  const leave = new Date();
-
-  leave.setHours(
-    hour,
-    minute,
-    0,
-    0
-  );
-
-  let diff =
-    Math.round(
-      (leave - now) / 60000
-    );
-
-  if (
-    diff > 0 &&
-    totalMinutes() > diff &&
-    !rush
-  ) {
-
-    document
-      .getElementById("rushModal")
-      .classList.remove("hidden");
-
-  }
-
-}
-
-
-/* 急ぎモード設定 */
-
-function setRush(value) {
-
-  rush = value;
-
-  document
-    .getElementById("rushModal")
-    .classList.add("hidden");
-
-  renderRoutine();
-
-}
-
-
-/* タイマー開始 */
-
-function startTimer() {
-
-  if (timerId) {
-    return;
-  }
-
-  if (currentStep >= routine.length) {
-
-    currentStep = 0;
-
-  }
-
-  remaining =
-    (
-      rush
-        ? routine[currentStep].rush
-        : routine[currentStep].normal
-    ) * 60;
-
-
-  document
-    .getElementById("timerName")
-    .textContent =
-      routine[currentStep].name;
-
-
-  renderTimer();
-
-
-  timerId =
-    setInterval(() => {
-
-      remaining--;
-
-      renderTimer();
-
-
-      if (remaining <= 0) {
-
-        stopTimer();
-
-        alert(
-          "「" +
-          routine[currentStep].name +
-          "」完了！"
-        );
-
-        nextStep();
-
-      }
-
-    }, 1000);
-
-}
-
-
-/* タイマー表示 */
-
-function renderTimer() {
-
-  const minutes =
-    Math.floor(remaining / 60);
-
-  const seconds =
-    remaining % 60;
-
-
-  document
-    .getElementById("timer")
-    .textContent =
-      String(minutes).padStart(2, "0")
-      +
-      ":"
-      +
-      String(seconds).padStart(2, "0");
-
-}
-
-
-/* 次のステップ */
-
-function nextStep() {
-
-  if (timerId) {
-
-    clearInterval(timerId);
-
-    timerId = null;
-
-  }
-
-
-  currentStep++;
-
-
-  if (currentStep >= routine.length) {
-
-    currentStep = 0;
-
-    document
-      .getElementById("timerName")
-      .textContent =
-        "🎉 ルーティン完了！";
-
-    document
-      .getElementById("timer")
-      .textContent =
-        "00:00";
-
-    alert(
-      "ルーティン全部完了！おつかれさま🌷"
-    );
-
-    renderRoutine();
-
-    return;
-
-  }
-
-
-  document
-    .getElementById("timerName")
-    .textContent =
-      routine[currentStep].name;
-
-  remaining =
-    (
-      rush
-        ? routine[currentStep].rush
-        : routine[currentStep].normal
-    ) * 60;
-
-  renderTimer();
-
-}
-
-
-/* タイマー停止 */
-
-function stopTimer() {
-
-  if (!timerId) {
-    return;
-  }
-
-  clearInterval(timerId);
-
-  timerId = null;
-
-}
-
-
-/* 初期表示 */
-
-renderTasks();
-
+renderHome();
+renderMinimum();
 renderRoutine();
+renderLog();
+renderCondition();
+
+saveData();
+
+}
+
+
+function renderHome(){
+
+const record=dayRecord();
+
+const done=data.tasks.filter(
+t=>t.done
+).length;
+
+const rate=data.tasks.length
+?Math.round(done/data.tasks.length*100)
+:0;
+
+document.getElementById(
+"todayText"
+).textContent=
+new Date().toLocaleDateString(
+"ja-JP",
+{
+weekday:"long",
+month:"long",
+day:"numeric"
+}
+);
+
+document.getElementById(
+"homeTime"
+).textContent=
+formatTime(record.total);
+
+document.getElementById(
+"homeRate"
+).textContent=
+rate+"%";
+
+document.getElementById(
+"homeBar"
+).style.width=
+rate+"%";
+
+document.getElementById(
+"conditionBox"
+).innerHTML=
+`<span class="badge">${esc(data.condition)}</span>`;
+
+
+const now=document.getElementById("nowBox");
+
+
+if(activeTask){
+
+const seconds=getActiveSeconds();
+
+now.innerHTML=`
+
+<div class="suggest">
+
+<b>${esc(activeTask.name)}</b>
+
+<div class="mini">
+${esc(activeTask.cat)}
+</div>
+
+<div class="timer" id="homeTimer">
+${formatTime(seconds)}
+</div>
+
+<div class="row">
+
+<button class="btn light"
+onclick="pauseTask()">
+⏸️ 中断
+</button>
+
+<button class="btn"
+onclick="finishTask()">
+✓ 終了
+</button>
+
+</div>
+
+</div>
+
+`;
+
+}else{
+
+const task=data.tasks.find(
+t=>!t.done
+);
+
+if(task){
+
+const index=data.tasks.indexOf(task);
+
+now.innerHTML=`
+
+<div class="suggest">
+
+<b>${esc(task.name)}</b>
+
+<div class="mini">
+${esc(task.cat)}
+</div>
+
+<button class="btn"
+onclick="startTask(${index})">
+▶ 今これをやる
+</button>
+
+</div>
+
+`;
+
+}else{
+
+now.innerHTML=`
+<div class="empty">
+今日の最低限は全部クリア！🎉
+</div>
+`;
+
+}
+
+}
+
+
+renderSchedule();
+
+const catBox=
+document.getElementById(
+"categoryStats"
+);
+
+const catsData=
+record.cats||{};
+
+catBox.innerHTML=
+cats.map(cat=>`
+
+<div class="schedule">
+
+<span style="flex:1">
+${cat}
+</span>
+
+<b>
+${formatTime(catsData[cat]||0)}
+</b>
+
+</div>
+
+`).join("");
+
+}
+
+
+function renderMinimum(){
+
+const box=
+document.getElementById("minTasks");
+
+if(!data.tasks.length){
+
+box.innerHTML=
+`<div class="empty">
+タスクを追加してね。
+</div>`;
+
+}else{
+
+box.innerHTML=
+data.tasks.map((task,index)=>{
+
+const seconds=
+dayRecord().tasks?.[task.name]||0;
+
+return `
+
+<div class="task ${task.done?"done":""}">
+
+<button
+class="check ${task.done?"done":""}"
+onclick="toggleTask(${index})">
+
+${task.done?"✓":""}
+
+</button>
+
+<div class="taskname">
+
+${esc(task.name)}
+
+<div class="mini">
+
+${esc(task.cat)}
+・${formatTime(seconds)}
+
+</div>
+
+</div>
+
+<button
+class="iconbtn"
+onclick="editTask(${index})">
+✏️
+</button>
+
+<button
+class="iconbtn"
+onclick="deleteTask(${index})">
+×
+</button>
+
+</div>
+
+`;
+
+}).join("");
+
+}
+
+
+const done=data.tasks.filter(
+t=>t.done
+).length;
+
+const rate=data.tasks.length
+?Math.round(done/data.tasks.length*100)
+:0;
+
+document.getElementById(
+"minBar"
+).style.width=rate+"%";
+
+document.getElementById(
+"minRate"
+).textContent=
+`${done}/${data.tasks.length} 完了 ・ ${rate}%`;
+
+
+const timerBox=
+document.getElementById("activeTimer");
+
+if(activeTask){
+
+timerBox.innerHTML=`
+
+<div class="center">
+
+<span class="badge">
+${esc(activeTask.name)}
+</span>
+
+<div class="timer" id="taskTimer">
+${formatTime(getActiveSeconds())}
+</div>
+
+<div class="row">
+
+<button class="btn light"
+onclick="pauseTask()">
+⏸️ 中断
+</button>
+
+<button class="btn"
+onclick="finishTask()">
+✓ 終了
+</button>
+
+</div>
+
+</div>
+
+`;
+
+}else{
+
+timerBox.innerHTML=
+`<div class="empty">
+今は計測していません。
+</div>`;
+
+}
+
+}
+
+
+/* =========================
+   TASKS
+========================= */
+
+function toggleTask(index){
+
+data.tasks[index].done=
+!data.tasks[index].done;
+
+saveData();
+renderAll();
+
+}
+
+
+function addTask(){
+
+openModal(`
+
+<h3>🌱 タスクを追加</h3>
+
+<input
+id="taskNameInput"
+class="input"
+placeholder="例：英単語"
+>
+
+<select
+id="taskCatInput"
+class="select"
+style="margin-top:8px">
+
+${cats.map(cat=>
+`<option>${cat}</option>`
+).join("")}
+
+</select>
+
+<button
+class="btn"
+onclick="saveNewTask()">
+追加
+</button>
+
+<button
+class="btn light"
+onclick="closeModal()">
+キャンセル
+</button>
+
+`);
+
+}
+
+
+function saveNewTask(){
+
+const name=
+document
+.getElementById("taskNameInput")
+.value.trim();
+
+if(!name){
+
+toast("タスク名を入れてね");
+
+return;
+
+}
+
+data.tasks.push({
+
+name:name,
+
+cat:
+document
+.getElementById("taskCatInput")
+.value,
+
+done:false
+
+});
+
+closeModal();
+renderAll();
+
+}
+
+
+function editTask(index){
+
+const task=data.tasks[index];
+
+openModal(`
+
+<h3>✏️ タスクを編集</h3>
+
+<input
+id="taskNameInput"
+class="input"
+value="${esc(task.name)}"
+>
+
+<select
+id="taskCatInput"
+class="select"
+style="margin-top:8px">
+
+${cats.map(cat=>
+`<option ${cat===task.cat?"selected":""}>
+${cat}
+</option>`
+).join("")}
+
+</select>
+
+<button
+class="btn"
+onclick="saveEditTask(${index})">
+保存
+</button>
+
+`);
+
+}
+
+
+function saveEditTask(index){
+
+const name=
+document
+.getElementById("taskNameInput")
+.value.trim();
+
+if(name){
+
+data.tasks[index].name=name;
+
+}
+
+data.tasks[index].cat=
+document
+.getElementById("taskCatInput")
+.value;
+
+closeModal();
+renderAll();
+
+}
+
+
+function deleteTask(index){
+
+if(!confirm("このタスクを削除する？"))return;
+
+data.tasks.splice(index,1);
+
+saveData();
+renderAll();
+
+}
+
+
+/* =========================
+   TASK TIMER
+========================= */
+
+function getActiveSeconds(){
+
+if(!activeTask)return 0;
+
+if(activeTask.paused){
+
+return activeTask.elapsed;
+
+}
+
+return activeTask.elapsed+
+Math.floor(
+(Date.now()-activeTask.started)/1000
+);
+
+}
+
+
+function startTask(index){
+
+if(activeTask){
+
+toast("まず今の計測を終えてね");
+
+return;
+
+}
+
+const task=data.tasks[index];
+
+activeTask={
+
+index:index,
+
+name:task.name,
+
+cat:task.cat,
+
+started:Date.now(),
+
+elapsed:0,
+
+paused:false
+
+};
+
+clearInterval(taskInterval);
+
+taskInterval=
+setInterval(updateTaskTimer,1000);
+
+renderAll();
+
+}
+
+
+function updateTaskTimer(){
+
+if(!activeTask)return;
+
+const seconds=getActiveSeconds();
+
+const ids=[
+"taskTimer",
+"homeTimer"
+];
+
+ids.forEach(id=>{
+
+const el=
+document.getElementById(id);
+
+if(el){
+
+el.textContent=
+formatTime(seconds);
+
+}
+
+});
+
+}
+
+
+function pauseTask(){
+
+if(!activeTask)return;
+
+if(!activeTask.paused){
+
+activeTask.elapsed=
+getActiveSeconds();
+
+activeTask.paused=true;
+
+clearInterval(taskInterval);
+
+toast("一旦休憩しよう🌱");
+
+}else{
+
+activeTask.started=Date.now();
+
+activeTask.paused=false;
+
+clearInterval(taskInterval);
+
+taskInterval=
+setInterval(updateTaskTimer,1000);
+
+toast("再開！");
+
+}
+
+renderAll();
+
+}
+
+
+function finishTask(){
+
+if(!activeTask)return;
+
+const seconds=
+getActiveSeconds();
+
+addRecord(
+activeTask.cat,
+seconds,
+activeTask.name
+);
+
+const index=activeTask.index;
+
+if(data.tasks[index]){
+
+data.tasks[index].done=true;
+
+}
+
+activeTask=null;
+
+clearInterval(taskInterval);
+
+taskInterval=null;
+
+saveData();
+renderAll();
+
+toast("記録したよ ✨");
+
+}
+
+
+/* =========================
+   5 MINUTE
+========================= */
+
+function fiveMinute(){
+
+const task=
+data.tasks.find(t=>!t.done);
+
+if(!task){
+
+toast("今日は最低限クリア！🎉");
+
+return;
+
+}
+
+if(activeTask){
+
+toast("まず今の計測を終えてね");
+
+return;
+
+}
+
+startTask(
+data.tasks.indexOf(task)
+);
+
+toast("5分だけやってみよう🌱");
+
+setTimeout(()=>{
+
+if(activeTask){
+
+toast(
+"5分できた！続ける？今日はここまででもOK🌱"
+);
+
+}
+
+},300000);
+
+}
+
+
+/* =========================
+   RESET
+========================= */
+
+function resetToday(){
+
+if(!confirm(
+"今日の完了状態と記録をリセットする？"
+))return;
+
+data.tasks.forEach(
+task=>task.done=false
+);
+
+delete data.records[todayKey()];
+
+saveData();
+renderAll();
+
+}
+
+
+/* =========================
+   ROUTINE
+========================= */
+
+function renderRoutine(){
+
+const tabs=
+document.getElementById(
+"routineTabs"
+);
+
+tabs.innerHTML=
+data.routines.map(
+(r,index)=>`
+
+<button
+class="routineTab ${index===selectedRoutine?"active":""}"
+onclick="selectRoutine(${index})">
+
+<b>${esc(r.name)}</b>
+
+<div class="mini">
+${r.steps.length}項目
+・
+${r.steps.reduce(
+(a,s)=>a+Number(s.min),0
+)}分
+</div>
+
+</button>
+
+`).join("");
+
+
+const routine=
+data.routines[selectedRoutine];
+
+const steps=
+document.getElementById(
+"routineSteps"
+);
+
+if(!routine.steps.length){
+
+steps.innerHTML=
+`<div class="empty">
+項目を追加してね。
+</div>`;
+
+}else{
+
+steps.innerHTML=
+routine.steps.map(
+(step,index)=>`
+
+<div class="step">
+
+<div class="stepnum">
+${index+1}
+</div>
+
+<div class="stepbody">
+
+<b>${esc(step.name)}</b>
+
+<div class="mini">
+${step.min}分
+</div>
+
+</div>
+
+<button
+class="iconbtn"
+onclick="moveStep(${index},-1)">
+↑
+</button>
+
+<button
+class="iconbtn"
+onclick="moveStep(${index},1)">
+↓
+</button>
+
+<button
+class="iconbtn"
+onclick="editStep(${index})">
+✏️
+</button>
+
+<button
+class="iconbtn"
+onclick="removeStep(${index})">
+×
+</button>
+
+</div>
+
+`).join("");
+
+}
+
+renderRoutineTimer();
+
+}
+
+
+function selectRoutine(index){
+
+stopRoutine();
+
+selectedRoutine=index;
+
+routineIndex=0;
+routineRemaining=0;
+
+renderAll();
+
+}
+
+
+function editRoutine(){
+
+const routine=
+data.routines[selectedRoutine];
+
+openModal(`
+
+<h3>✏️ ルーティン名</h3>
+
+<input
+id="routineNameInput"
+class="input"
+value="${esc(routine.name)}"
+>
+
+<button
+class="btn"
+onclick="saveRoutineName()">
+保存
+</button>
+
+`);
+
+}
+
+
+function saveRoutineName(){
+
+const name=
+document
+.getElementById("routineNameInput")
+.value.trim();
+
+if(name){
+
+data.routines[selectedRoutine].name=
+name;
+
+}
+
+closeModal();
+renderAll();
+
+}
+
+
+function duplicateRoutine(){
+
+if(data.routines.length>=3){
+
+toast("ルーティンは3つまでだよ");
+
+return;
+
+}
+
+const copy=
+JSON.parse(
+JSON.stringify(
+data.routines[selectedRoutine]
+)
+);
+
+copy.name=
+copy.name+" コピー";
+
+data.routines.push(copy);
+
+selectedRoutine=
+data.routines.length-1;
+
+saveData();
+renderAll();
+
+toast("複製したよ✨");
+
+}
+
+
+function addStep(){
+
+openModal(`
+
+<h3>＋ 項目を追加</h3>
+
+<input
+id="stepNameInput"
+class="input"
+placeholder="例：英単語"
+>
+
+<input
+id="stepMinInput"
+class="input"
+type="number"
+min="1"
+value="5"
+style="margin-top:8px"
+placeholder="分"
+>
+
+<button
+class="btn"
+onclick="saveStep()">
+追加
+</button>
+
+`);
+
+}
+
+
+function saveStep(){
+
+const name=
+document
+.getElementById("stepNameInput")
+.value.trim();
+
+const min=
+Math.max(
+1,
+Number(
+document
+.getElementById("stepMinInput")
+.value
+)||5
+);
+
+if(!name){
+
+toast("項目名を入れてね");
+
+return;
+
+}
+
+data.routines[
+selectedRoutine
+].steps.push({
+
+name:name,
+
+min:min
+
+});
+
+closeModal();
+renderAll();
+
+}
+
+
+function editStep(index){
+
+const step=
+data.routines[
+selectedRoutine
+].steps[index];
+
+openModal(`
+
+<h3>✏️ 項目を編集</h3>
+
+<input
+id="stepNameInput"
+class="input"
+value="${esc(step.name)}"
+>
+
+<input
+id="stepMinInput"
+class="input"
+type="number"
+min="1"
+value="${step.min}"
+style="margin-top:8px"
+>
+
+<button
+class="btn"
+onclick="saveEditedStep(${index})">
+保存
+</button>
+
+`);
+
+}
+
+
+function saveEditedStep(index){
+
+const name=
+document
+.getElementById("stepNameInput")
+.value.trim();
+
+const min=
+Math.max(
+1,
+Number(
+document
+.getElementById("stepMinInput")
+.value
+)||1
+);
+
+if(name){
+
+data.routines[
+selectedRoutine
+].steps[index]={
+name:name,
+min:min
+};
+
+}
+
+closeModal();
+renderAll();
+
+}
+
+
+function removeStep(index){
+
+if(!confirm(
+"この項目を削除する？"
+))return;
+
+data.routines[
+selectedRoutine
+].steps.splice(index,1);
+
+renderAll();
+
+}
+
+
+function moveStep(index,direction){
+
+const steps=
+data.routines[
+selectedRoutine
+].steps;
+
+const newIndex=
+index+direction;
+
+if(
+newIndex<0||
+newIndex>=steps.length
+)return;
+
+[
+steps[index],
+steps[newIndex]
+]=[
+steps[newIndex],
+steps[index]
+];
+
+renderAll();
+
+}
+
+
+/* =========================
+   ROUTINE TIMER
+========================= */
+
+function startRoutine(){
+
+const routine=
+data.routines[selectedRoutine];
+
+if(!routine.steps.length){
+
+toast("項目を追加してね");
+
+return;
+
+}
+
+if(routineRunning){
+
+toast("もう動いてるよ");
+
+return;
+
+}
+
+if(routineRemaining<=0){
+
+routineIndex=0;
+
+routineRemaining=
+Number(
+routine.steps[0].min
+)*60;
+
+}
+
+routineRunning=true;
+
+clearInterval(routineInterval);
+
+routineInterval=
+setInterval(()=>{
+
+if(!routineRunning)return;
+
+routineRemaining--;
+
+if(routineRemaining<=0){
+
+routineIndex++;
+
+if(
+routineIndex>=
+routine.steps.length
+){
+
+stopRoutine();
+
+routineIndex=
+routine.steps.length-1;
+
+routineRemaining=0;
+
+renderAll();
+
+toast(
+"ルーティン完了！🎉"
+);
+
+return;
+
+}
+
+routineRemaining=
+Number(
+routine.steps[routineIndex].min
+)*60;
+
+toast(
+"次へ → "+
+routine.steps[routineIndex].name
+);
+
+}
+
+renderRoutineTimer();
+
+},1000);
+
+renderRoutineTimer();
+
+}
+
+
+function stopRoutine(){
+
+routineRunning=false;
+
+clearInterval(routineInterval);
+
+routineInterval=null;
+
+renderRoutineTimer();
+
+}
+
+
+function skipStep(){
+
+const routine=
+data.routines[selectedRoutine];
+
+if(!routine.steps.length)return;
+
+routineIndex++;
+
+if(
+routineIndex>=routine.steps.length
+){
+
+routineIndex=0;
+
+routineRemaining=
+routine.steps[0].min*60;
+
+}else{
+
+routineRemaining=
+routine.steps[routineIndex].min*60;
+
+}
+
+renderRoutineTimer();
+
+}
+
+
+function renderRoutineTimer(){
+
+const box=
+document.getElementById(
+"routineTimer"
+);
+
+const routine=
+data.routines[selectedRoutine];
+
+if(
+!routine||
+!routine.steps.length
+){
+
+box.innerHTML="";
+
+return;
+
+}
+
+const current=
+routine.steps[routineIndex];
+
+let remaining=
+routineRemaining;
+
+if(!remaining){
+
+remaining=
+current.min*60;
+
+}
+
+const future=
+routine.steps
+.slice(routineIndex+1)
+.reduce(
+(total,step)=>
+total+Number(step.min)*60,
+0
+);
+
+const totalRemaining=
+remaining+future;
+
+box.innerHTML=`
+
+<div class="card"
+style="background:#f7f4fb;margin-top:12px">
+
+<div class="center">
+
+<span class="badge">
+今：${esc(current.name)}
+</span>
+
+<div class="timer">
+${formatTime(remaining)}
+</div>
+
+<div class="muted">
+全体の残り 約
+${Math.ceil(totalRemaining/60)}
+分
+</div>
+
+<button
+class="btn gray"
+onclick="stopRoutine()">
+${routineRunning?"⏸️ 一時停止":"⏸️ 停止"}
+</button>
+
+<button
+class="btn light"
+onclick="startRoutine()">
+▶️ ${routineRunning?"再スタート":"再開"}
+</button>
+
+</div>
+
+</div>
+
+`;
+
+}
+
+
+/* =========================
+   SCHEDULE
+========================= */
+
+function renderSchedule(){
+
+const box=
+document.getElementById(
+"scheduleList"
+);
+
+if(!data.schedule.length){
+
+box.innerHTML=
+`<div class="empty">
+予定はまだありません。
+</div>`;
+
+return;
+
+}
+
+const sorted=
+data.schedule
+.map((item,index)=>({
+...item,
+original:index
+}))
+.sort(
+(a,b)=>
+a.time.localeCompare(b.time)
+);
+
+box.innerHTML=
+sorted.map(
+item=>`
+
+<div class="schedule">
+
+<span class="scheduleTime">
+${item.time}
+</span>
+
+<span style="flex:1">
+${esc(item.name)}
+</span>
+
+<button
+class="iconbtn"
+onclick="deleteSchedule(${item.original})">
+×
+</button>
+
+</div>
+
+`).join("");
+
+}
+
+
+function openSchedule(){
+
+openModal(`
+
+<h3>📅 今日の予定</h3>
+
+<input
+id="scheduleTimeInput"
+class="input"
+type="time"
+>
+
+<input
+id="scheduleNameInput"
+class="input"
+style="margin-top:8px"
+placeholder="予定"
+>
+
+<button
+class="btn"
+onclick="saveSchedule()">
+追加
+</button>
+
+`);
+
+}
+
+
+function saveSchedule(){
+
+const time=
+document
+.getElementById("scheduleTimeInput")
+.value;
+
+const name=
+document
+.getElementById("scheduleNameInput")
+.value.trim();
+
+if(!time||!name){
+
+toast("時間と予定を入れてね");
+
+return;
+
+}
+
+data.schedule.push({
+time:time,
+name:name
+});
+
+closeModal();
+renderAll();
+
+}
+
+
+function deleteSchedule(index){
+
+data.schedule.splice(index,1);
+
+renderAll();
+
+}
+
+
+/* =========================
+   FLOWに任せる
+========================= */
+
+function flowDecide(){
+
+const task=
+data.tasks.find(
+t=>!t.done
+);
+
+if(
+data.condition==="🫠 しんどい"||
+data.condition==="😴 眠い"
+){
+
+if(task){
+
+openModal(`
+
+<h3>🌱 今はこれだけ</h3>
+
+<p>
+今のコンディションなら、
+まず
+<strong>
+「${esc(task.name)}」
+</strong>
+を5分だけやってみるのがおすすめ。
+</p>
+
+<button
+class="btn"
+onclick="closeModal();fiveMinute()">
+▶ 5分だけ始める
+</button>
+
+`);
+
+return;
+
+}
+
+}
+
+
+if(task){
+
+const index=
+data.tasks.indexOf(task);
+
+openModal(`
+
+<h3>✨ FLOWに任せる</h3>
+
+<p>
+今は
+<strong>
+「${esc(task.name)}」
+</strong>
+から始めるのがおすすめ。
+</p>
+
+<button
+class="btn"
+onclick="closeModal();startTask(${index})">
+▶ 今これをやる
+</button>
+
+`);
+
+return;
+
+}
+
+
+if(
+data.routines[selectedRoutine] &&
+data.routines[selectedRoutine].steps.length
+){
+
+openModal(`
+
+<h3>✨ ルーティンを始めよう</h3>
+
+<p>
+「${esc(
+data.routines[selectedRoutine].name
+)}」
+が使えそう。
+</p>
+
+<button
+class="btn"
+onclick="closeModal();page('routine');startRoutine()">
+▶ 開始
+</button>
+
+`);
+
+return;
+
+}
+
+
+toast("今日は全部クリア！🎉");
+
+}
+
+
+/* =========================
+   LOG
+========================= */
+
+function renderLog(){
+
+const now=new Date();
+
+let total=0;
+
+const categoryTotals={};
+
+for(
+let i=0;
+i<currentLogRange;
+i++
+){
+
+const date=
+new Date(now);
+
+date.setDate(
+now.getDate()-i
+);
+
+const record=
+data.records[todayKey(date)];
+
+if(!record)continue;
+
+total+=record.total||0;
+
+Object.entries(
+record.cats||{}
+).forEach(
+([category,seconds])=>{
+
+categoryTotals[category]=
+(categoryTotals[category]||0)
++seconds;
+
+});
+
+}
+
+
+document.getElementById(
+"logContent"
+).innerHTML=`
+
+<div class="stat">
+
+<div class="muted">
+
+${
+currentLogRange===1
+?"今日"
+:`過去${currentLogRange}日`
+}
+
+</div>
+
+<b>
+${formatTime(total)}
+</b>
+
+</div>
+
+${
+cats.map(
+cat=>`
+
+<div class="schedule">
+
+<span style="flex:1">
+${cat}
+</span>
+
+<b>
+${formatTime(
+categoryTotals[cat]||0
+)}
+</b>
+
+</div>
+
+`
+).join("")
+}
+
+`;
+
+}
+
+
+function logRange(days,element){
+
+currentLogRange=days;
+
+document
+.querySelectorAll("#log .pill")
+.forEach(
+button=>
+button.classList.remove("active")
+);
+
+element.classList.add("active");
+
+renderLog();
+
+}
+
+
+/* =========================
+   CONDITION
+========================= */
+
+function renderCondition(){
+
+const options=[
+"😊 元気",
+"😐 普通",
+"😴 眠い",
+"🫠 しんどい"
+];
+
+document.getElementById(
+"conditionChoices"
+).innerHTML=
+
+options.map(
+option=>`
+
+<button
+class="pill ${data.condition===option?"active":""}"
+onclick="setCondition('${option}')">
+
+${option}
+
+</button>
+
+`).join("");
+
+}
+
+
+function setCondition(value){
+
+data.condition=value;
+
+saveData();
+
+renderAll();
+
+toast("今日の状態を記録したよ");
+
+}
+
+
+/* =========================
+   MODAL
+========================= */
+
+function openModal(html){
+
+document.getElementById(
+"modalBox"
+).innerHTML=html;
+
+document.getElementById(
+"modal"
+).classList.remove("hidden");
+
+}
+
+
+function closeModal(){
+
+document.getElementById(
+"modal"
+).classList.add("hidden");
+
+}
+
+
+document
+.getElementById("modal")
+.addEventListener(
+"click",
+function(event){
+
+if(
+event.target.id==="modal"
+){
+
+closeModal();
+
+}
+
+});
+
+
+/* =========================
+   TOAST
+========================= */
+
+function toast(message){
+
+const element=
+document.getElementById("toast");
+
+element.textContent=message;
+
+element.classList.remove("hidden");
+
+setTimeout(
+()=>{
+element.classList.add("hidden");
+},
+2200
+);
+
+}
+
+
+/* =========================
+   BACKUP
+========================= */
+
+function exportData(){
+
+const blob=
+new Blob(
+[
+JSON.stringify(
+data,
+null,
+2
+)
+],
+{
+type:"application/json"
+}
+);
+
+const url=
+URL.createObjectURL(blob);
+
+const link=
+document.createElement("a");
+
+link.href=url;
+
+link.download=
+"FLOW-backup.json";
+
+document.body.appendChild(link);
+
+link.click();
+
+link.remove();
+
+URL.revokeObjectURL(url);
+
+toast("バックアップを作ったよ");
+
+}
+
+
+function importData(event){
+
+const file=
+event.target.files[0];
+
+if(!file)return;
+
+const reader=
+new FileReader();
+
+reader.onload=function(){
+
+try{
+
+const imported=
+JSON.parse(
+reader.result
+);
+
+if(
+!imported.tasks||
+!imported.routines
+){
+
+throw new Error();
+
+}
+
+data=imported;
+
+saveData();
+
+renderAll();
+
+toast("復元したよ！");
+
+}catch(error){
+
+toast(
+"このファイルは読み込めないみたい"
+);
+
+}
+
+};
+
+reader.readAsText(file);
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+renderAll();
+
+setInterval(
+()=>{
+updateTaskTimer();
+},
+1000
+);
 
 </script>
 
